@@ -1,6 +1,7 @@
 # py模块
 from khl import Bot, Message,MessageTypes ## kook机器人(khl.py)模块
 from khl.card import Card, CardMessage, Module, Types, Element, Struct ##kook卡片(khl.py)模块
+from khl import EventTypes, Event ##kook监听(khl.py)模块
 import json ##json文件模块
 
 #kook机器人连接
@@ -22,8 +23,8 @@ async def help(msg:Message):
     help_card_1.append(Module.Divider()) ### help_card_1分隔符
 
     help_card_2 = Card(
-        Module.Section("快捷指令"),
-        Element.Button("帮助开发机器人",value='https://khl-py.eu.org/',click=Types.Click.LINK,theme=Types.Theme.SECONDARY),
+        Module.Section("快捷指令"), 
+        Module.ActionGroup(Element.Button("帮助开发机器人",value='https://khl-py.eu.org/',click=Types.Click.LINK,theme=Types.Theme.SECONDARY)), 
         color='#0000FF'
         )
     
@@ -84,11 +85,11 @@ async def ping(msg:Message):
     await msg.reply(ping_back,type=MessageTypes.CARD) ### 发送ping返回卡片
 
 ## 菜单-ping按钮执行
-#@bot.on_event(EventTypes.MESSAGE_BTN_CLICK)
-#async def btn_click_event(b:Bot,e:Event):
-#    """按钮点击事件"""
-#    print(e.target_id)
-#    print(e.body,"\n")
+@bot.on_event(EventTypes.MESSAGE_BTN_CLICK)
+async def btn_click_event(b:Bot,e:Event):
+    """按钮点击事件"""
+    print(e.target_id)
+    print(e.body,"\n")
 
 
 # 机器人运行
