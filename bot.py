@@ -17,18 +17,25 @@ bot = Bot(token=token)
 ##菜单
 @bot.command(name="help",aliases=['指令'])
 async def help(msg:Message):
+    ch = await bot.client.fetch_public_channel("1038117411797245") ### 指定频道收取发送
     help_card_1 = Card(
         Module.Header("欢迎来到FAMS服务器！"),
         color='#DC143C') ### 标题卡片
     help_card_1.append(Module.Divider()) ### help_card_1分隔符
 
-    help_card_2 = Card(
-        Module.Section("快捷指令"), 
+    help_card_3 = Card(
+        Module.Section(""), 
+        Module.ActionGroup(Element.Button("帮助开发机器人",value='https://khl-py.eu.org/',click=Types.Click.LINK,theme=Types.Theme.SECONDARY)), 
+        color='#0000FF'
+        )
+
+    help_card_3 = Card(
+        Module.Section("常用链接"), 
         Module.ActionGroup(Element.Button("帮助开发机器人",value='https://khl-py.eu.org/',click=Types.Click.LINK,theme=Types.Theme.SECONDARY)), 
         color='#0000FF'
         )
     
-    help_card_3 = Card(
+    help_card_4 = Card(
         Module.ActionGroup(
             Element.Button("按钮文字1",value='按钮值1',click=Types.Click.RETURN_VAL,theme=Types.Theme.INFO),
             Element.Button("按钮文字2",value='按钮值2',click=Types.Click.RETURN_VAL,theme=Types.Theme.DANGER),
@@ -87,9 +94,50 @@ async def ping(msg:Message):
 ## 菜单-ping按钮执行
 @bot.on_event(EventTypes.MESSAGE_BTN_CLICK)
 async def btn_click_event(b:Bot,e:Event):
+    ch = await bot.client.fetch_public_channel("1038117411797245") ### 指定频道收取发送
     """按钮点击事件"""
-    print(e.target_id)
-    print(e.body,"\n")
+    ping_back = [
+  {
+    "type": "card",
+    "theme": "secondary",
+    "size": "lg",
+    "modules": [
+      {
+        "type": "header",
+        "text": {
+          "type": "plain-text",
+          "content": "调试返回"
+        }
+      },
+      {
+        "type": "section",
+        "text": {
+          "type": "plain-text",
+          "content": "返回值：pong!!"
+        }
+      },
+      {
+        "type": "divider"
+      },
+      {
+        "type": "context",
+        "elements": [
+          {
+            "type": "image",
+            "src": "https://i.mcmod.cn/play/favicon/20187418.png?r=JnEv"
+          },
+          {
+            "type": "plain-text",
+            "content": "FAMS"
+          }
+        ]
+      }
+    ]
+  }
+]### ping返回卡片
+    await msg.reply(ping_back,type=MessageTypes.CARD) ### 发送ping返回卡片
+
+
 
 
 # 机器人运行
