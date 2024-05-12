@@ -11,7 +11,7 @@ from khl.card import Card, CardMessage, Module, Types, Element, Struct ## 卡片
 from khl import EventTypes, Event ## 监听模块
 import json ##json文件模块
 
-# 日志模块(def)
+# 日志模块
 ## 获取当前时间
 current_time = datetime.datetime.now()
 ## 格式化时间为 "年-月-日-时-分"
@@ -20,21 +20,27 @@ time_str = current_time.strftime("%Y-%m-%d-%H-%M")
 folder_name = f"{time_str}_logs"
 ## 初始化logs变量
 logs = 0
+logs_name = 0
     
 ## 检查logs文件夹是否存在
 if not os.path.exists("logs"):
-# 如果不存在，则创建logs文件夹
+## 如果不存在，则创建logs文件夹
     os.makedirs("logs")
     logs = "false"
-    
+
 ## 在logs文件夹中创建以当前时间命名的.txt文件
 file_name = os.path.join("logs", f"{time_str}.txt")
-with open(file_name, "a",encoding="utf-8") as f:
+with open(file_name, "a", encoding="utf-8") as f:
     ## logs文件夹是否存在日志写入
     if logs == "false":
         f.write("[日志]未检测到日志文件夹，已自动创建日志文件夹\n")
     ## 写入日志文本
     f.write("[日志]创建日志成功\n")
+
+## 将日志文件名记录到logs.json文件中
+logs_dict = {"logs": file_name}
+with open("logs.json", "w", encoding="utf-8") as f:
+    json.dump(logs_dict, f, ensure_ascii=False, indent=4)
 
 # kook机器人连接
 ## 读取key.josn文件的token
@@ -66,7 +72,7 @@ async def bot_ping(msg:Message):
         "type": "header",
         "text": {
           "type": "plain-text",
-          "content": "调试返回"
+          "content": "[bot]调试返回"
         }
       },
       {
@@ -98,6 +104,19 @@ async def bot_ping(msg:Message):
     await msg.reply(ping_back,type=MessageTypes.CARD) ## 发送卡片
     with open(file_name, "a",encoding="utf-8") as f:
         f.write("[bot]返回ping\n")
+
+# 异步文件运行
+
+##/ menu
+import menu ## 导入menu.py
+@bot.on_startup
+async def runpy(bot:Bot):
+    ## menu.py
+    menu.init(bot)
+    with open(file_name, "a",encoding="utf-8") as f:
+        f.write("[bot]menu功能已启用\n")
+
+
     
 
 
