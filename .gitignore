@@ -1,2 +1,5 @@
 #git传库拒绝传哪些文件
-config.json
+key.json
+参考文件
+logs
+测试.py
