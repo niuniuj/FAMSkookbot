@@ -1,0 +1,8 @@
+[日志]创建日志成功
+[日志]已写入日志名于logs.txt
+[bot]token：1/MjI5MjY=/5hhBFgRqR4PzavPHVdUaQw==
+[bot]实例创建成功
+[menu]读取txt目录：logs\2024-05-18-16-01.txt
+[bot]menu功能已启用
+[power]读取txt目录：logs\2024-05-18-16-01.txt
+[bot]power功能已启用

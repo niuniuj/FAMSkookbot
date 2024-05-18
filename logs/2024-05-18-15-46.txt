@@ -1,0 +1,4 @@
+[日志]创建日志成功
+[日志]已写入日志名于logs.txt
+[bot]token：1/MjI5MjY=/5hhBFgRqR4PzavPHVdUaQw==
+[bot]实例创建成功

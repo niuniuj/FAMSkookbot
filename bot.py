@@ -9,8 +9,8 @@ import datetime ## 时间模块
 from khl import Bot, Message,MessageTypes ## 主模块
 from khl.card import Card, CardMessage, Module, Types, Element, Struct ## 卡片=模块
 from khl import EventTypes, Event ## 监听模块
-
-import json ##json文件模块
+##json文件模块
+import json
 
 # 日志模块
 ## 获取当前时间
@@ -64,7 +64,7 @@ with open(file_name, "a",encoding="utf-8") as f:
 @bot.command(name='ping')
 async def bot_ping(msg:Message):
     with open(file_name, "a",encoding="utf-8") as f:
-        f.write("[bot]用户发送了ping指令\n")
+        f.write("[bot]用户{}发送了ping指令\n".format(msg.author_id))
     ping_back = [
          {
     "type": "card",
@@ -113,13 +113,20 @@ async def bot_ping(msg:Message):
 ##/ menu
 import menu ## 导入menu.py
 @bot.on_startup
-async def runpy(bot:Bot):
+async def run_menu(bot:Bot):
     ## menu.py
     menu.init(bot)
     with open(file_name, "a",encoding="utf-8") as f:
         f.write("[bot]menu功能已启用\n")
-
-
+      
+##/ power
+import power ## 导入menu.py
+@bot.on_startup
+async def run_power(bot:Bot):
+    ## power.py
+    power.init(bot)
+    with open(file_name, "a",encoding="utf-8") as f:
+          f.write("[bot]power功能已启用\n")
     
 
 

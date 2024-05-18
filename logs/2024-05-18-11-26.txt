@@ -1,0 +1,7 @@
+[日志]未检测到日志文件夹，已自动创建日志文件夹
+[日志]创建日志成功
+[日志]已写入日志名于logs.txt
+[bot]token：1/MjI5MjY=/5hhBFgRqR4PzavPHVdUaQw==
+[bot]实例创建成功
+[menu]读取txt目录：logs\2024-05-18-11-26.txt
+[bot]menu功能已启用
