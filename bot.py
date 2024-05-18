@@ -9,6 +9,7 @@ import datetime ## 时间模块
 from khl import Bot, Message,MessageTypes ## 主模块
 from khl.card import Card, CardMessage, Module, Types, Element, Struct ## 卡片=模块
 from khl import EventTypes, Event ## 监听模块
+
 import json ##json文件模块
 
 # 日志模块
@@ -38,9 +39,11 @@ with open(file_name, "a", encoding="utf-8") as f:
     f.write("[日志]创建日志成功\n")
 
 ## 将日志文件名记录到logs.json文件中
-logs_dict = {"logs": file_name}
-with open("logs.json", "w", encoding="utf-8") as f:
-    json.dump(logs_dict, f, ensure_ascii=False, indent=4)
+logs_txt = os.path.join("logs",f"logs.txt")
+with open(logs_txt,"w",encoding="utf-8") as f:
+    f.write(file_name)
+with open(file_name, "a", encoding="utf-8") as f:
+  f.write("[日志]已写入日志名于logs.txt\n")
 
 # kook机器人连接
 ## 读取key.josn文件的token
@@ -54,7 +57,7 @@ bot = Bot(token=token)
 ##/ 编写日志
 with open(file_name, "a",encoding="utf-8") as f:
     ##/ 日志正文
-    f.write("[bot]token：\n".format(token))
+    f.write("[bot]token：{}\n".format(token))
     f.write("[bot]实例创建成功\n")
 
 # 主程序ping

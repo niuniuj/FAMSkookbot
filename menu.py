@@ -9,18 +9,20 @@ import datetime ## 时间模块
 from khl import Bot, Message,MessageTypes ## 主模块
 from khl.card import Card, CardMessage, Module, Types, Element, Struct ## 卡片=模块
 from khl import EventTypes, Event ## 监听模块
+
 import json ##json文件模块
 
 # 程序函数注册
 def init(bot:Bot):
     ##/ 获取logs文件名
-    with open('/logs/logs.json') as f:
-        logs = json.load(f)
-    file_name = logs['logs']
+    with open('logs/logs.txt', 'r', encoding='utf-8') as file:
+        file_name = file.read()
+    with open(file_name, "a",encoding="utf-8") as f:
+        f.write("[menu]读取txt目录：{}\n".format(file_name))
 
 # 程序ping
     @bot.command(name='menu-ping')
-    async def bot_ping(msg:Message):
+    async def menu_ping(msg:Message):
         with open(file_name, "a",encoding="utf-8") as f:
             f.write("[menu]用户发送了ping指令\n")
         ping_back = [
